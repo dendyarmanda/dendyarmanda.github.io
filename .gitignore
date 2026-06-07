@@ -27,3 +27,4 @@ pnpm-debug.log*
 .claude/
 .mega-sdd/
 .playwright-mcp/
+preview-*.png

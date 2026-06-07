@@ -26,7 +26,7 @@ export const profile = {
   email: 'dendyseptianarmanda@gmail.com',
   // Optional headshot: drop a file in public/ (e.g. public/me.jpg), then set
   // the path here (e.g. '/me.jpg'). Leave '' to hide the avatar gracefully.
-  photo: '', // TODO(dendy): '/me.jpg'
+  photo: '/me.png', // DUMMY monogram avatar — ganti dengan foto asli ('/me.jpg')
   // Show the "open to opportunities" availability badge in the hero.
   available: true,
   social: {
@@ -56,39 +56,61 @@ export interface Experience {
   highlights: L[];
 }
 
-// TODO(dendy): isi dengan pengalaman kerja kamu yang sebenarnya.
+// DUMMY data — ganti dengan pengalaman kerja kamu yang sebenarnya.
 export const experience: Experience[] = [
   {
-    company: 'PT Bank Example Tbk', // TODO
-    role: { id: 'Banking Software Engineer', en: 'Banking Software Engineer' },
+    company: 'PT Bank Digital Nusantara', // TODO: perusahaan asli
+    role: {
+      id: 'Senior Banking Software Engineer',
+      en: 'Senior Banking Software Engineer',
+    },
     period: { id: '2022 — Sekarang', en: '2022 — Present' },
     highlights: [
       {
-        id: 'Mengembangkan layanan microservices untuk core banking menggunakan Java Spring Boot.',
-        en: 'Developed core banking microservices using Java Spring Boot.',
+        id: 'Memimpin pengembangan layanan core banking berbasis microservices (Java Spring Boot) yang memproses 2 juta+ transaksi/hari.',
+        en: 'Led microservices-based core banking services (Java Spring Boot) processing 2M+ transactions/day.',
       },
       {
-        id: 'Membangun integrasi switching ISO 8583 untuk transaksi ATM dan EDC.',
-        en: 'Built ISO 8583 switching integration for ATM and EDC transactions.',
+        id: 'Membangun integrasi switching ISO 8583 untuk ATM, EDC, dan QRIS dengan uptime 99,95%.',
+        en: 'Built ISO 8583 switching for ATM, EDC, and QRIS with 99.95% uptime.',
       },
       {
-        id: 'Mengoptimasi query database, menurunkan latensi transaksi hingga 40%.',
-        en: 'Optimized database queries, reducing transaction latency by up to 40%.',
+        id: 'Mengoptimasi query dan caching, menurunkan latensi transaksi hingga 40%.',
+        en: 'Optimized queries and caching, cutting transaction latency by up to 40%.',
       },
     ],
   },
   {
-    company: 'PT Fintech Example', // TODO
-    role: { id: 'Backend Developer', en: 'Backend Developer' },
+    company: 'PT Pembayaran Andal Indonesia', // TODO
+    role: { id: 'Backend Engineer', en: 'Backend Engineer' },
     period: { id: '2019 — 2022', en: '2019 — 2022' },
     highlights: [
       {
-        id: 'Mengembangkan REST API payment gateway dengan throughput tinggi.',
-        en: 'Developed high-throughput payment gateway REST APIs.',
+        id: 'Mengembangkan REST API payment gateway throughput tinggi (10k+ TPS) untuk 30+ merchant.',
+        en: 'Developed high-throughput payment gateway REST APIs (10k+ TPS) for 30+ merchants.',
       },
       {
-        id: 'Menerapkan rekonsiliasi transaksi otomatis dan pelaporan harian.',
-        en: 'Implemented automated transaction reconciliation and daily reporting.',
+        id: 'Menerapkan rekonsiliasi transaksi otomatis, mengurangi kerja manual tim ops 70%.',
+        en: 'Implemented automated transaction reconciliation, reducing ops manual work by 70%.',
+      },
+      {
+        id: 'Menyiapkan pipeline CI/CD dan observability (Prometheus & Grafana).',
+        en: 'Set up CI/CD pipelines and observability (Prometheus & Grafana).',
+      },
+    ],
+  },
+  {
+    company: 'PT Solusi Teknologi Finansial', // TODO
+    role: { id: 'Software Engineer', en: 'Software Engineer' },
+    period: { id: '2017 — 2019', en: '2017 — 2019' },
+    highlights: [
+      {
+        id: 'Membangun modul internet banking dan notifikasi transaksi real-time.',
+        en: 'Built internet banking modules and real-time transaction notifications.',
+      },
+      {
+        id: 'Berkontribusi pada audit keamanan dan kepatuhan PCI-DSS.',
+        en: 'Contributed to security audits and PCI-DSS compliance.',
       },
     ],
   },
