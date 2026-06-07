@@ -9,11 +9,9 @@ interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-// TODO(dendy): Dapatkan access key GRATIS di https://web3forms.com
-// (cukup masukkan email kamu), lalu ganti placeholder di bawah.
-// Sebelum diganti, form belum akan mengirim email — tombol email manual di
-// bawah tetap berfungsi sebagai cadangan.
-const WEB3FORMS_ACCESS_KEY = 'YOUR_WEB3FORMS_ACCESS_KEY';
+// Web3Forms access key. Public by design — it only lets the browser POST a
+// message to your inbox; it is not a secret. Regenerate at https://web3forms.com.
+const WEB3FORMS_ACCESS_KEY = '6af052a4-73f1-4aaf-bbb9-031e5dc235ba';
 
 const inputClass =
   'mt-1 w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-slate-900 outline-none transition focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-900 dark:text-white';
