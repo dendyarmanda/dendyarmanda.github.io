@@ -11,11 +11,11 @@ const t = useTranslations(lang);
 const year = new Date().getFullYear();
 ---
 
-<footer class="no-print relative mt-8 py-10 text-center text-sm text-slate-500">
+<footer class="no-print relative mt-8 py-10 text-center text-sm text-slate-400">
   <div
     class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/40 to-transparent"
   >
   </div>
   <p>© {year} {profile.name}. {t('footer.rights')}</p>
-  <p class="mt-1 font-mono text-xs text-slate-600">{t('footer.built')}</p>
+  <p class="mt-1 font-mono text-xs text-slate-500">{t('footer.built')}</p>
 </footer>
