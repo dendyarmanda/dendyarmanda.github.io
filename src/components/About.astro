@@ -10,28 +10,27 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section
-  id="about"
-  class="border-t border-slate-200 py-12 md:py-16 dark:border-slate-800"
->
-  <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-    {t('about.title')}
-  </h2>
-  <p class="mt-4 max-w-3xl leading-relaxed text-slate-600 dark:text-slate-300">
+<section id="about" class="scroll-mt-20 border-t border-white/5 py-16 md:py-24">
+  <div data-reveal>
+    <p class="font-mono text-sm font-medium text-brand-300">01 / {t('about.title')}</p>
+    <h2 class="mt-2 font-display text-3xl font-bold tracking-tight text-white md:text-4xl">
+      {t('about.title')}
+    </h2>
+  </div>
+
+  <p
+    data-reveal
+    class="mt-6 max-w-3xl text-lg leading-relaxed text-slate-400"
+  >
     {about.summary[lang]}
   </p>
 
-  <h3
-    class="mt-8 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400"
-  >
-    {t('about.focus')}
-  </h3>
-  <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+  <ul class="mt-8 grid gap-3 sm:grid-cols-2" data-reveal>
     {
       about.focus.map((item) => (
-        <li class="flex items-start gap-2 text-slate-700 dark:text-slate-300">
+        <li class="glass glass-hover flex items-start gap-3 rounded-xl px-4 py-3.5 text-slate-200">
           <svg
-            class="mt-1 h-4 w-4 shrink-0 text-brand-600 dark:text-brand-400"
+            class="mt-0.5 h-5 w-5 shrink-0 text-brand-300"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"

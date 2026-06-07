@@ -1,4 +1,8 @@
 ---
+// Self-hosted variable fonts (zero external requests, no FOIT/layout shift)
+import '@fontsource-variable/inter';
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/jetbrains-mono';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -25,10 +29,11 @@ const ogLocale = lang === 'id' ? 'id_ID' : 'en_US';
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-smooth">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a0e1a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -42,22 +47,36 @@ const ogLocale = lang === 'id' ? 'id_ID' : 'en_US';
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={ogLocale} />
     <meta name="twitter:card" content="summary_large_image" />
-    <!-- Set theme before paint to avoid a flash of the wrong color scheme -->
+    <!-- Enable JS-only reveal state before paint (no JS → content stays visible) -->
     <script is:inline>
-      const stored = localStorage.getItem('theme');
-      if (
-        stored === 'dark' ||
-        (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        document.documentElement.classList.add('dark');
-      }
+      document.documentElement.classList.add('js');
     </script>
   </head>
-  <body
-    class="bg-slate-50 text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-200"
-  >
+  <body class="overflow-x-clip">
     {showChrome && <Header lang={lang} altHref={altHref} />}
     <slot />
     {showChrome && <Footer lang={lang} />}
+
+    <!-- Scroll reveal: progressive enhancement, reduced-motion aware -->
+    <script>
+      const els = document.querySelectorAll('[data-reveal]');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
   </body>
 </html>
