@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Class-based dark mode toggle (Tailwind v4) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #d9e6ff;
+  --color-brand-200: #bcd3ff;
+  --color-brand-300: #8eb6ff;
+  --color-brand-400: #598dff;
+  --color-brand-500: #3366ff;
+  --color-brand-600: #1f4ae0;
+  --color-brand-700: #1a3bb8;
+  --color-brand-800: #1b3494;
+  --color-brand-900: #1c3175;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Print-optimized résumé (the /cv and /en/cv pages) */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .print-container {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  a {
+    color: #000 !important;
+    text-decoration: none !important;
+  }
+}

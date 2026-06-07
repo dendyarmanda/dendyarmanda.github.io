@@ -1,0 +1,49 @@
+---
+import { about } from '../data/cv';
+import { useTranslations } from '../i18n/ui';
+import type { Locale } from '../data/cv';
+
+interface Props {
+  lang: Locale;
+}
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section
+  id="about"
+  class="border-t border-slate-200 py-12 md:py-16 dark:border-slate-800"
+>
+  <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+    {t('about.title')}
+  </h2>
+  <p class="mt-4 max-w-3xl leading-relaxed text-slate-600 dark:text-slate-300">
+    {about.summary[lang]}
+  </p>
+
+  <h3
+    class="mt-8 text-sm font-semibold uppercase tracking-widest text-slate-500 dark:text-slate-400"
+  >
+    {t('about.focus')}
+  </h3>
+  <ul class="mt-4 grid gap-3 sm:grid-cols-2">
+    {
+      about.focus.map((item) => (
+        <li class="flex items-start gap-2 text-slate-700 dark:text-slate-300">
+          <svg
+            class="mt-1 h-4 w-4 shrink-0 text-brand-600 dark:text-brand-400"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+          {item[lang]}
+        </li>
+      ))
+    }
+  </ul>
+</section>

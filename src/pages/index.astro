@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import { profile } from '../data/cv';
+
+const lang = 'id';
+const title = `${profile.name} — ${profile.role.id}`;
+const description = profile.tagline.id;
+---
+
+<Base lang={lang} title={title} description={description} altHref="/en/">
+  <Hero lang={lang} cvHref="/cv" />
+  <main class="mx-auto max-w-5xl px-4">
+    <About lang={lang} />
+    <Experience lang={lang} />
+    <Skills lang={lang} />
+    <Projects lang={lang} />
+    <Contact lang={lang} />
+  </main>
+</Base>
