@@ -24,6 +24,11 @@ export const profile = {
     en: 'Jakarta, Indonesia', // TODO: your city
   } as L,
   email: 'dendyseptianarmanda@gmail.com',
+  // Optional headshot: drop a file in public/ (e.g. public/me.jpg), then set
+  // the path here (e.g. '/me.jpg'). Leave '' to hide the avatar gracefully.
+  photo: '', // TODO(dendy): '/me.jpg'
+  // Show the "open to opportunities" availability badge in the hero.
+  available: true,
   social: {
     github: 'https://github.com/dendyarmanda',
     // TODO: ganti dengan URL LinkedIn kamu yang benar
