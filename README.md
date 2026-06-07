@@ -1,65 +1,134 @@
-# Dendy Septian Armanda — CV / Portfolio
+# 🪪 CV / Portfolio — Dendy Septian Armanda
 
-Bilingual (🇮🇩 / 🇬🇧) personal CV & portfolio site for a **Banking Software Engineer**.
-Built with [Astro](https://astro.build) + [Tailwind CSS v4](https://tailwindcss.com).
-Static, fast, ~zero JavaScript. Deploys for free on **GitHub Pages** and **Vercel**.
+Website CV pribadi buat **Banking Software Engineer**. Dua bahasa (🇮🇩/🇬🇧), gelap-elegan, ada partikel gerak di background, dan **gratis** (deploy ke GitHub Pages + Vercel sekaligus).
 
-- **Indonesian (default):** `/`
-- **English:** `/en/`
-- **Print/PDF résumé:** `/cv` and `/en/cv` (click "Simpan sebagai PDF" → Save as PDF)
+Dibikin pakai [Astro](https://astro.build) + [Tailwind CSS v4](https://tailwindcss.com). Static, ringan, hampir tanpa JavaScript → cepet + skor SEO bagus.
+
+🔗 **Live:** https://dendyarmanda.github.io · https://profile-eight-inky-80.vercel.app
+
+| Halaman | URL |
+|---|---|
+| Indonesia (default) | `/` |
+| English | `/en/` |
+| CV buat di-print/PDF | `/cv` · `/en/cv` (klik "Simpan sebagai PDF") |
 
 ---
 
-## Run locally
+## 🚀 Cara jalanin (Run Guide)
+
+Butuh **Node.js versi 22.12 ke atas** (cek: `node -v`).
 
 ```bash
+# 1. masuk folder project
+cd profile
+
+# 2. install dependency (sekali aja di awal)
 npm install
-npm run dev      # http://localhost:4321
-npm run build    # output → dist/
-npm run preview  # preview the production build
+
+# 3. jalanin mode development (auto-reload tiap nyimpen)
+npm run dev
+# → buka http://localhost:4321
+```
+
+Selesai. Tiap kamu edit file dan save, browser otomatis refresh.
+
+Perintah lain:
+
+```bash
+npm run build     # build versi production ke folder dist/
+npm run preview   # lihat hasil build production di lokal
 ```
 
 ---
 
-## ✏️ How to edit your content
+## ✏️ Cara ganti isi CV
 
-Everything lives in **one file**: [`src/data/cv.ts`](src/data/cv.ts).
-Each field has an `id` (Indonesian) and `en` (English) value. Edit, save, redeploy.
+**Semua teks ada di SATU file:** [`src/data/cv.ts`](src/data/cv.ts).
 
-UI labels (nav, buttons) are in [`src/i18n/ui.ts`](src/i18n/ui.ts).
+Tiap data punya 2 versi bahasa — `id` (Indonesia) & `en` (Inggris). Tinggal ganti, save, beres. Contoh:
 
-### TODO — replace placeholders (search the code for `TODO`)
+```ts
+export const profile = {
+  name: 'Dendy Septian Armanda',
+  role: { id: 'Banking Software Engineer', en: 'Banking Software Engineer' },
+  // ...
+};
+```
 
-- [ ] `src/data/cv.ts` → **experience** (company names, roles, periods, highlights)
-- [ ] `src/data/cv.ts` → **projects** (real projects + optional repo links)
-- [ ] `src/data/cv.ts` → **skills** (adjust to your stack)
-- [ ] `src/data/cv.ts` → **profile.location** (your city)
-- [ ] `src/data/cv.ts` → **profile.social.linkedin** (your real LinkedIn URL)
-- [ ] `src/components/Contact.astro` → **`WEB3FORMS_ACCESS_KEY`** (see below)
+Cari komentar `// TODO` di file itu — itu bagian yang masih **dummy** dan perlu kamu ganti:
+- pengalaman kerja (nama perusahaan, periode, pencapaian — pakai angka kalau bisa)
+- proyek
+- skill
+- kota & URL LinkedIn
 
-### Contact form (Web3Forms — free)
+Label tombol / menu ada di [`src/i18n/ui.ts`](src/i18n/ui.ts).
 
-1. Go to <https://web3forms.com>, enter your email, copy the **Access Key**.
-2. In `src/components/Contact.astro`, replace `YOUR_WEB3FORMS_ACCESS_KEY`.
-3. Redeploy. Until then, the manual `mailto:` link below the form still works.
+### 📸 Ganti foto
+
+Sekarang fotonya masih avatar dummy "DS". Mau pakai foto asli:
+
+1. Taruh foto kamu di folder `public/`, misal `public/me.jpg`.
+2. Buka `src/data/cv.ts`, ubah:
+   ```ts
+   photo: '/me.jpg',   // sesuaikan nama file-nya
+   ```
+
+Mau hilangin foto? Kosongin aja: `photo: ''`.
+
+### 📨 Form kontak
+
+Form kontak udah aktif (pakai layanan gratis **Web3Forms**), pesan masuk ke email kamu. Access key-nya ada di `src/components/Contact.astro` — aman ditaruh di kode publik (memang didesain begitu). Mau ganti email tujuan? Bikin key baru gratis di [web3forms.com](https://web3forms.com).
 
 ---
 
-## 🚀 Deploy
+## 🌐 Cara deploy / update
 
-### GitHub Pages (primary — `https://dendyarmanda.github.io`)
+Udah otomatis. **Cukup push ke GitHub:**
 
-Already wired via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
-After the first push to `main`:
+```bash
+git add -A
+git commit -m "update konten cv"
+git push
+```
 
-1. Repo → **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Every push to `main` rebuilds and deploys automatically.
+Sekali push → **dua situs langsung ke-update sendiri** (GitHub Pages + Vercel). Tunggu ±1-2 menit.
 
-### Vercel (secondary mirror)
+---
 
-1. <https://vercel.com> → **Add New → Project** → import this repo.
-2. Vercel auto-detects Astro (build `astro build`, output `dist`). No config needed.
-3. Deploy. Every push to `main` also redeploys here.
+## 🎨 Kalau ganti nama/role/tagline
 
-> The canonical URL (`site` in `astro.config.mjs`) points to GitHub Pages, so
-> search engines treat the Pages URL as primary and the Vercel URL as a mirror.
+Gambar preview yang muncul pas link di-share (di WA/LinkedIn) perlu di-generate ulang:
+
+```bash
+node scripts/gen-og.mjs   # bikin ulang public/og.png
+```
+
+---
+
+## 📁 Struktur singkat
+
+```
+profile/
+├─ src/
+│  ├─ data/cv.ts          # ← semua isi CV (edit di sini)
+│  ├─ i18n/ui.ts          # teks menu/tombol
+│  ├─ layouts/Base.astro  # kerangka halaman (meta, font, background)
+│  ├─ components/         # Hero, About, Experience, Skills, Projects, Contact, ...
+│  └─ pages/              # index (id), en/, cv, en/cv
+├─ public/                # favicon, og.png, foto
+├─ scripts/               # generator og image & avatar
+└─ astro.config.mjs       # konfigurasi (i18n, sitemap, dll)
+```
+
+---
+
+## 🛠️ Mampet? (Troubleshooting)
+
+- **`npm run dev` error soal Node** → Node kamu di bawah 22.12. Update Node dulu.
+- **Font keliatan default/jelek** → pastikan dependency ke-install (`npm install`).
+- **Port 4321 kepake** → Astro otomatis pindah ke 4322, lihat aja URL di terminal.
+- **Habis push tapi situs belum berubah** → tunggu 1-2 menit (cache CDN), terus hard-refresh (`Ctrl+Shift+R`).
+
+---
+
+Dibikin dengan Astro · gratis selamanya · 💙
