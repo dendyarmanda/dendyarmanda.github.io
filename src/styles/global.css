@@ -33,10 +33,11 @@ html {
   scroll-behavior: smooth;
   color-scheme: dark;
   scrollbar-color: #1e293b var(--color-ink);
+  background-color: var(--color-ink); /* base layer behind the particle canvas */
 }
 
 body {
-  background-color: var(--color-ink);
+  background-color: transparent; /* let the fixed particle canvas show through */
   color: #cbd5e1; /* slate-300 */
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
