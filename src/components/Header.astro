@@ -21,7 +21,7 @@ const nav = [
 ---
 
 <header class="no-print sticky top-0 z-50 border-b border-white/5 bg-ink/70 backdrop-blur-xl">
-  <nav class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3.5">
+  <nav class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-2.5">
     <a href="#top" class="font-display text-base font-bold tracking-tight">
       <span class="text-gradient">DSA</span>
     </a>
@@ -30,7 +30,7 @@ const nav = [
       {
         nav.map((item) => (
           <li>
-            <a class="text-slate-300 transition-colors hover:text-white" href={item.href}>
+            <a class="nav-link text-slate-300 transition-colors hover:text-white" href={item.href} data-navlink>
               {item.label}
             </a>
           </li>
@@ -41,26 +41,39 @@ const nav = [
     <div class="flex items-center gap-2">
       <a
         href={altHref}
-        class="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 font-mono text-xs font-semibold text-slate-200 transition hover:border-brand-400/50 hover:text-white"
+        class="inline-flex min-h-11 items-center rounded-lg border border-white/10 bg-white/5 px-3 font-mono text-xs font-semibold transition hover:border-brand-400/50"
         aria-label={`Switch language to ${otherLang.toUpperCase()}`}
       >
-        {languages[lang]} <span class="text-slate-600">/</span> {languages[otherLang]}
+        <span class="text-white">{languages[lang]}</span>
+        <span class="mx-1 text-slate-600">/</span>
+        <span class="text-slate-500">{languages[otherLang]}</span>
       </a>
 
       <button
         id="menu-btn"
         type="button"
-        class="rounded-lg border border-white/10 bg-white/5 p-2 text-slate-200 transition hover:text-white md:hidden"
+        class="rounded-lg border border-white/10 bg-white/5 p-3 text-slate-200 transition hover:text-white md:hidden"
         aria-label="Menu"
         aria-controls="mobile-menu"
         aria-expanded="false"
       >
-        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg id="menu-icon-open" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-icon-close" class="hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 6l12 12M18 6 6 18" />
         </svg>
       </button>
     </div>
   </nav>
+
+  <!-- Scroll progress -->
+  <div
+    id="scroll-progress"
+    class="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-brand-500 to-brand-300"
+    aria-hidden="true"
+  >
+  </div>
 
   <!-- Mobile menu -->
   <div id="mobile-menu" class="hidden border-t border-white/5 bg-ink/95 backdrop-blur-xl md:hidden">
@@ -71,6 +84,7 @@ const nav = [
             <a
               class="block rounded-lg px-3 py-3 text-sm font-medium text-slate-300 transition hover:bg-white/5 hover:text-white"
               href={item.href}
+              data-navlink
             >
               {item.label}
             </a>
@@ -84,16 +98,73 @@ const nav = [
 <script>
   const btn = document.getElementById('menu-btn');
   const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  function setMenu(open: boolean) {
+    menu?.classList.toggle('hidden', !open);
+    btn?.setAttribute('aria-expanded', String(open));
+    iconOpen?.classList.toggle('hidden', open);
+    iconClose?.classList.toggle('hidden', !open);
+  }
+
   if (btn && menu) {
-    btn.addEventListener('click', () => {
-      const isHidden = menu.classList.toggle('hidden');
-      btn.setAttribute('aria-expanded', String(!isHidden));
+    btn.addEventListener('click', () => setMenu(menu.classList.contains('hidden')));
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setMenu(false);
     });
-    menu.querySelectorAll('a').forEach((a) =>
-      a.addEventListener('click', () => {
-        menu.classList.add('hidden');
-        btn.setAttribute('aria-expanded', 'false');
-      })
+    document.addEventListener('click', (e) => {
+      if (!menu.classList.contains('hidden') && e.target instanceof Node && !menu.contains(e.target) && !btn.contains(e.target)) {
+        setMenu(false);
+      }
+    });
+  }
+
+  // Scroll progress bar
+  const bar = document.getElementById('scroll-progress');
+  if (bar) {
+    let ticking = false;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+      ticking = false;
+    };
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      },
+      { passive: true }
     );
+    update();
+  }
+
+  // Scroll-spy: highlight nav link of the section in view
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-navlink]');
+  const sections = [...links]
+    .map((l) => l.hash)
+    .filter((h, i, arr) => h && arr.indexOf(h) === i)
+    .map((h) => document.querySelector<HTMLElement>(h))
+    .filter((s): s is HTMLElement => s !== null);
+
+  if (sections.length && 'IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          links.forEach((l) => {
+            if (l.hash === `#${e.target.id}`) l.setAttribute('aria-current', 'true');
+            else l.removeAttribute('aria-current');
+          });
+        }
+      },
+      // active band = middle of the viewport
+      { rootMargin: '-35% 0px -55% 0px' }
+    );
+    sections.forEach((s) => spy.observe(s));
   }
 </script>

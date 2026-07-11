@@ -26,7 +26,7 @@ export const profile = {
   email: 'dendyseptianarmanda@gmail.com',
   // Optional headshot: drop a file in public/ (e.g. public/me.jpg), then set
   // the path here (e.g. '/me.jpg'). Leave '' to hide the avatar gracefully.
-  photo: '/me.png', // DUMMY monogram avatar — ganti dengan foto asli ('/me.jpg')
+  photo: '/me.jpg', // DUMMY stock photo (pravatar) — ganti dengan foto asli
   // Show the "open to opportunities" availability badge in the hero.
   available: true,
   social: {

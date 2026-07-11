@@ -7,8 +7,8 @@ Update terakhir: Juni 2026.
 
 ## ✅ Status: LIVE & jalan
 
-- 🟢 GitHub Pages: https://dendyarmanda.github.io (canonical/utama)
-- 🟢 Vercel (mirror): https://profile-eight-inky-80.vercel.app
+- 🟢 GitHub Pages: <https://dendyarmanda.github.io> (canonical/utama)
+- 🟢 Vercel (mirror): <https://profile-eight-inky-80.vercel.app>
 - 🟢 Push ke `main` → dua-duanya auto-deploy (~1-2 menit)
 - 🟢 Form kontak aktif (Web3Forms) — sudah dites, email masuk
 - 🟢 Bilingual id/en, dark theme, partikel interaktif, OG image, SEO/JSON-LD
@@ -31,7 +31,7 @@ Update terakhir: Juni 2026.
 > Semua konten sekarang **DUMMY** — keliatan utuh tapi belum data beneran.
 
 - [ ] **Konten asli** di `src/data/cv.ts` (cari `// TODO`): nama perusahaan asli, periode, pencapaian (pakai angka!), proyek nyata, skill, kota, **URL LinkedIn** beneran.
-- [ ] **Foto asli** → taruh `public/me.jpg`, set `profile.photo: '/me.jpg'` (sekarang masih avatar monogram "DS").
+- [ ] **Foto asli** → timpa `public/me.jpg` (sekarang foto dummy stock dari pravatar; path sudah `'/me.jpg'`).
 - [ ] (Opsional) **Section Education + Certifications** — belum dibuat, tinggal minta kalau mau.
 - [ ] (Opsional) **Custom domain** (mis. `dendyarmanda.dev`, ~$10/thn) — satu-satunya yang berbayar; bikin lebih kredibel dari `*.github.io`.
 - [ ] (Opsional) **Analytics** privacy-friendly (Umami / GoatCounter, gratis).
@@ -41,7 +41,7 @@ Update terakhir: Juni 2026.
 - **Repo**: `github.com/dendyarmanda/dendyarmanda.github.io` (akun `dendyarmanda`).
   - Token `gh` udah punya scope `workflow` + git credential helper udah di-set.
 - **Vercel**: project `profile` (akun `dendy-septian-armanda-s-projects`), udah konek ke repo (auto-deploy).
-- **Web3Forms**: access key ada di `src/components/Contact.astro` (email tujuan: dendyseptianarmanda@gmail.com). Aman publik.
+- **Web3Forms**: access key ada di `src/components/Contact.astro` (email tujuan: <dendyseptianarmanda@gmail.com>). Aman publik.
 
 ## 📐 Keputusan teknis (kenapa begini)
 

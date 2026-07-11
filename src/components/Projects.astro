@@ -8,6 +8,7 @@ interface Props {
 }
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const oddCount = projects.length % 2 === 1;
 ---
 
 <section id="projects" class="scroll-mt-20 border-t border-white/5 py-16 md:py-24">
@@ -20,10 +21,14 @@ const t = useTranslations(lang);
 
   <div class="mt-10 grid gap-5 sm:grid-cols-2">
     {
-      projects.map((project) => (
+      projects.map((project, i) => (
         <article
           data-reveal
-          class="glass glass-hover group relative flex flex-col overflow-hidden rounded-2xl p-6"
+          class:list={[
+            'glass glass-hover spotlight group relative flex flex-col overflow-hidden rounded-2xl p-6',
+            // no orphan hole: last card of an odd list spans the full row
+            oddCount && i === projects.length - 1 && 'sm:col-span-2',
+          ]}
         >
           <span class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent" />
           <h3 class="font-display text-lg font-semibold text-white">{project.name}</h3>
@@ -42,10 +47,21 @@ const t = useTranslations(lang);
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-300 transition hover:text-brand-200"
+              class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-300 transition after:absolute after:inset-0 hover:text-brand-200"
             >
               {t('projects.visit')}
-              <span aria-hidden="true" class="transition group-hover:translate-x-0.5">→</span>
+              <svg
+                aria-hidden="true"
+                class="h-4 w-4 transition group-hover:translate-x-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </a>
           )}
         </article>
@@ -53,3 +69,14 @@ const t = useTranslations(lang);
     }
   </div>
 </section>
+
+<script>
+  // Spotlight: track cursor per card via CSS vars (style in global.css)
+  document.querySelectorAll<HTMLElement>('.spotlight').forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--sx', `${e.clientX - r.left}px`);
+      card.style.setProperty('--sy', `${e.clientY - r.top}px`);
+    });
+  });
+</script>

@@ -110,6 +110,59 @@ body {
 }
 
 /* =========================================================================
+   NAV  —  scroll-spy active state + animated underline (desktop),
+   active row highlight (mobile menu). aria-current set by Header script.
+   ========================================================================= */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #3b82f6, #67e8f9);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link:hover::after,
+.nav-link[aria-current]::after {
+  transform: scaleX(1);
+}
+.nav-link[aria-current] {
+  color: #fff;
+}
+#mobile-menu a[aria-current] {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+/* =========================================================================
+   SPOTLIGHT  —  cursor-tracking glow on cards (--sx/--sy set by script)
+   ========================================================================= */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    220px circle at var(--sx, 50%) var(--sy, 50%),
+    rgba(56, 189, 248, 0.12),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* =========================================================================
    SCROLL REVEAL  —  progressive enhancement
    Hidden state ONLY when JS is on (html.js). No JS → content visible.
    ========================================================================= */
