@@ -1,5 +1,5 @@
 ---
-import { profile, about, experience, skills, projects } from '../data/cv';
+import { profile, about, experience, skills, projects, education } from '../data/cv';
 import type { Locale } from '../data/cv';
 
 interface Props {
@@ -72,9 +72,32 @@ const { lang } = Astro.props;
       {
         projects.map((project) => (
           <div>
-            <h3 class="font-semibold text-white">{project.name}</h3>
+            <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+              <h3 class="font-semibold text-white">{project.name}</h3>
+              {project.period && (
+                <span class="font-mono text-sm text-slate-400">{project.period[lang]}</span>
+              )}
+            </div>
             <p class="text-sm text-slate-300">{project.description[lang]}</p>
             <p class="font-mono text-xs text-slate-400">{project.tech.join(' · ')}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mt-6">
+    <h2 class="font-mono text-xs font-bold uppercase tracking-widest text-brand-300">
+      {lang === 'id' ? 'Pendidikan' : 'Education'}
+    </h2>
+    <div class="mt-3 space-y-2">
+      {
+        education.map((edu) => (
+          <div class="flex flex-wrap items-baseline justify-between gap-x-3">
+            <h3 class="font-semibold text-white">
+              {edu.degree[lang]} · {edu.school}
+            </h3>
+            <span class="font-mono text-sm text-slate-400">{edu.period[lang]}</span>
           </div>
         ))
       }

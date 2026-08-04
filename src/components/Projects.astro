@@ -32,6 +32,9 @@ const oddCount = projects.length % 2 === 1;
         >
           <span class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/60 to-transparent" />
           <h3 class="font-display text-lg font-semibold text-white">{project.name}</h3>
+          {project.period && (
+            <p class="mt-1 font-mono text-xs text-slate-500">{project.period[lang]}</p>
+          )}
           <p class="mt-2 flex-1 text-sm leading-relaxed text-slate-400">
             {project.description[lang]}
           </p>

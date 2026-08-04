@@ -9,7 +9,7 @@ Bilingual, static, zero-cost. Deployed to **both** GitHub Pages + Vercel.
 
 - 🇮🇩 Indonesian (default): `/`  · 🇬🇧 English: `/en/`
 - Print/PDF résumé: `/cv` and `/en/cv`
-- Live: https://dendyarmanda.github.io · https://profile-eight-inky-80.vercel.app
+- Live: <https://dendyarmanda.github.io> · <https://profile-eight-inky-80.vercel.app>
 
 ## Stack
 
@@ -48,6 +48,7 @@ Detailed run/edit/deploy guide → `README.md`. Project state + pending work →
 6. **Canonical = GitHub Pages.** `site` in `astro.config.mjs` is `https://dendyarmanda.github.io`. Vercel is a mirror.
 7. Edit content **only** in `src/data/cv.ts` / `src/i18n/ui.ts` — components render from data, don't hardcode copy.
 8. After changing name/role/hero tags, **re-run `node scripts/gen-og.mjs`** so the share card stays in sync.
+9. **Every technical term added to `cv.ts` must get an entry in `GLOSSARY.md`** (format: Apa → Di project gue → Jawaban interview). It's the owner's interview-prep doc — CV copy and glossary must never drift apart.
 
 ## Conventions
 

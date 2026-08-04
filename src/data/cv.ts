@@ -56,61 +56,44 @@ export interface Experience {
   highlights: L[];
 }
 
-// DUMMY data — ganti dengan pengalaman kerja kamu yang sebenarnya.
 export const experience: Experience[] = [
   {
-    company: 'PT Bank Digital Nusantara', // TODO: perusahaan asli
+    company: 'PT Bank Mega Tbk',
     role: {
-      id: 'Senior Banking Software Engineer',
-      en: 'Senior Banking Software Engineer',
+      id: 'Treasury & International Banking Specialist — Full Stack Engineer',
+      en: 'Treasury & International Banking Specialist — Full Stack Engineer',
     },
-    period: { id: '2022 — Sekarang', en: '2022 — Present' },
+    period: { id: 'Feb 2022 — Sekarang', en: 'Feb 2022 — Present' },
     highlights: [
       {
-        id: 'Memimpin pengembangan layanan core banking berbasis microservices (Java Spring Boot) yang memproses 2 juta+ transaksi/hari.',
-        en: 'Led microservices-based core banking services (Java Spring Boot) processing 2M+ transactions/day.',
+        id: 'Membangun platform standing instruction bank secara end-to-end — 4 service (core API, Kafka consumer, scheduler, admin dashboard) yang mengotomasi pembayaran berulang dari autodebet tagihan biller hingga transfer terjadwal.',
+        en: "Built the bank's standing-instruction platform end-to-end — 4 services (core API, Kafka consumer, scheduler, admin dashboard) automating recurring payments from biller autodebet to scheduled transfers.",
       },
       {
-        id: 'Membangun integrasi switching ISO 8583 untuk ATM, EDC, dan QRIS dengan uptime 99,95%.',
-        en: 'Built ISO 8583 switching for ATM, EDC, and QRIS with 99.95% uptime.',
+        id: 'Merancang pipeline pembayaran Kafka yang idempotent dengan retry/DLQ dan pengaman anti-double-charge (manual offset commit, partition ordering per akun).',
+        en: 'Designed an idempotent Kafka payment pipeline with retry/DLQ and double-charge safeguards (manual offset commit, per-account partition ordering).',
       },
       {
-        id: 'Mengoptimasi query dan caching, menurunkan latensi transaksi hingga 40%.',
-        en: 'Optimized queries and caching, cutting transaction latency by up to 40%.',
+        id: 'Mengimplementasi audit trail dual-store (PostgreSQL + Cassandra) dengan distributed tracing end-to-end untuk setiap attempt pembayaran.',
+        en: 'Implemented a dual-store audit trail (PostgreSQL + Cassandra) with end-to-end distributed tracing for every payment attempt.',
+      },
+      {
+        id: 'Memimpin production hardening: transaction outbox + rekonsiliasi otomatis, graceful-shutdown drain, redaksi PII di log, health check Kubernetes, dan benchmark throughput consumer.',
+        en: 'Led production hardening: transaction outbox + auto-reconciliation, graceful-shutdown drain, PII log redaction, Kubernetes health checks, and consumer throughput benchmarking.',
       },
     ],
   },
   {
-    company: 'PT Pembayaran Andal Indonesia', // TODO
-    role: { id: 'Backend Engineer', en: 'Backend Engineer' },
-    period: { id: '2019 — 2022', en: '2019 — 2022' },
+    company: 'PT Bank Mega Tbk',
+    role: {
+      id: 'IT Development Program — Application Developer',
+      en: 'IT Development Program — Application Developer',
+    },
+    period: { id: 'Agu 2022 — Feb 2023 (Kontrak)', en: 'Aug 2022 — Feb 2023 (Contract)' },
     highlights: [
       {
-        id: 'Mengembangkan REST API payment gateway throughput tinggi (10k+ TPS) untuk 30+ merchant.',
-        en: 'Developed high-throughput payment gateway REST APIs (10k+ TPS) for 30+ merchants.',
-      },
-      {
-        id: 'Menerapkan rekonsiliasi transaksi otomatis, mengurangi kerja manual tim ops 70%.',
-        en: 'Implemented automated transaction reconciliation, reducing ops manual work by 70%.',
-      },
-      {
-        id: 'Menyiapkan pipeline CI/CD dan observability (Prometheus & Grafana).',
-        en: 'Set up CI/CD pipelines and observability (Prometheus & Grafana).',
-      },
-    ],
-  },
-  {
-    company: 'PT Solusi Teknologi Finansial', // TODO
-    role: { id: 'Software Engineer', en: 'Software Engineer' },
-    period: { id: '2017 — 2019', en: '2017 — 2019' },
-    highlights: [
-      {
-        id: 'Membangun modul internet banking dan notifikasi transaksi real-time.',
-        en: 'Built internet banking modules and real-time transaction notifications.',
-      },
-      {
-        id: 'Berkontribusi pada audit keamanan dan kepatuhan PCI-DSS.',
-        en: 'Contributed to security audits and PCI-DSS compliance.',
+        id: 'Program pengembangan IT Bank Mega sebagai Application Developer — membangun aplikasi internal berbasis Java Spring Boot.',
+        en: "Bank Mega's IT Development Program as an Application Developer — built internal applications with Java Spring Boot.",
       },
     ],
   },
@@ -121,23 +104,42 @@ export interface SkillGroup {
   items: string[];
 }
 
-// TODO(dendy): sesuaikan daftar keahlian kamu.
 export const skills: SkillGroup[] = [
   {
     title: { id: 'Bahasa Pemrograman', en: 'Languages' },
-    items: ['Java', 'Kotlin', 'TypeScript', 'SQL', 'Python'],
+    items: ['TypeScript', 'JavaScript', 'SQL'],
   },
   {
-    title: { id: 'Framework & Library', en: 'Frameworks & Libraries' },
-    items: ['Spring Boot', 'Node.js', 'React', 'Astro'],
+    title: { id: 'Backend & Framework', en: 'Backend & Frameworks' },
+    items: ['Bun', 'Node.js', 'Fastify', 'Next.js', 'React', 'Prisma', 'kafkajs', 'TanStack Query'],
   },
   {
     title: { id: 'Domain Perbankan', en: 'Banking Domain' },
-    items: ['Core Banking', 'ISO 8583', 'Payment Switching', 'BI-FAST', 'QRIS', 'PCI-DSS'],
+    items: [
+      'Standing Instruction / Recurring Payments',
+      'Payment Switching Integration',
+      'EOD Settlement & Reconciliation',
+      'Idempotency Patterns',
+      'RBAC & Data Scoping',
+    ],
   },
   {
-    title: { id: 'DevOps & Tools', en: 'DevOps & Tools' },
-    items: ['Docker', 'Kubernetes', 'Kafka', 'Jenkins', 'Git', 'Oracle', 'PostgreSQL'],
+    title: { id: 'Data & Infrastruktur', en: 'Data & Infrastructure' },
+    items: ['Kafka', 'PostgreSQL', 'Cassandra', 'Redis', 'Elasticsearch', 'Docker', 'Kubernetes', 'Linux cron', 'Git'],
+  },
+];
+
+export interface Education {
+  school: string;
+  degree: L;
+  period: L;
+}
+
+export const education: Education[] = [
+  {
+    school: 'Universitas Airlangga (UNAIR)',
+    degree: { id: 'S1 Matematika', en: "Bachelor's degree, Mathematics" },
+    period: { id: 'Agu 2017 — Jul 2022', en: 'Aug 2017 — Jul 2022' },
   },
 ];
 
@@ -146,33 +148,35 @@ export interface Project {
   description: L;
   tech: string[];
   link?: string;
+  /** Optional — omit for projects whose timeframe is already clear from `experience`. */
+  period?: L;
 }
 
-// TODO(dendy): ganti dengan proyek kamu yang sebenarnya (boleh tambah link repo).
 export const projects: Project[] = [
   {
-    name: 'Core Banking Microservices',
+    name: 'Standing Instruction — Recurring Payment Platform',
     description: {
-      id: 'Platform core banking berbasis microservices untuk pemrosesan transaksi real-time.',
-      en: 'Microservices-based core banking platform for real-time transaction processing.',
+      id: 'Platform standing instruction Bank untuk semua pembayaran berulang — autodebet tagihan biller hingga transfer terjadwal — otomatis dari penjadwalan, eksekusi, sampai settlement. Dibangun event-driven dengan jaminan idempotency anti-double-charge, audit trail dual-store, dan rekonsiliasi otomatis kelas perbankan.',
+      en: 'Bank-wide standing-instruction platform automating every recurring payment — biller autodebet to scheduled transfers — from scheduling through execution to settlement. Event-driven with double-charge-safe idempotent processing, dual-store audit trail, and bank-grade automated reconciliation.',
     },
-    tech: ['Java', 'Spring Boot', 'Kafka', 'Oracle'],
-    // link: 'https://github.com/dendyarmanda/...',
+    tech: ['TypeScript', 'Bun', 'Fastify', 'Next.js', 'Kafka', 'PostgreSQL', 'Cassandra', 'Redis', 'Kubernetes'],
   },
   {
-    name: 'Payment Gateway Integration',
+    name: 'Enterprise Object Storage & Document Management Platform',
     description: {
-      id: 'Integrasi switching ISO 8583 yang menghubungkan kanal ATM/EDC ke core banking.',
-      en: 'ISO 8583 switching integration connecting ATM/EDC channels to core banking.',
+      id: 'Platform object storage & document management internal Bank yang menggantikan solusi vendor, dibangun sepenuhnya on-premise di atas MinIO. Fitur utama: engine otorisasi policy-based (PBAC) kustom dengan kondisi granular hingga level IP/CIDR, tiering penyimpanan HOT/COLD otomatis berbasis pola akses (setara S3 Intelligent-Tiering), pencarian full-text, serta audit trail lengkap untuk kebutuhan kepatuhan perbankan.',
+      en: "The bank's internal object storage & document management platform replacing a vendor solution, built fully on-premise on MinIO. Key features: a custom policy-based authorization engine (PBAC) with granular conditions down to IP/CIDR level, automated access-pattern-driven HOT/COLD storage tiering (S3 Intelligent-Tiering equivalent), full-text search, and a complete audit trail for banking compliance.",
     },
-    tech: ['Java', 'Redis', 'ISO 8583'],
+    tech: ['TypeScript', 'Bun', 'Fastify', 'Next.js', 'MinIO', 'PostgreSQL', 'Cassandra', 'Typesense', 'Redis', 'Prisma', 'CASL'],
   },
   {
-    name: 'Transaction Monitoring Dashboard',
+    name: 'GBK Mobile — Aplikasi Resmi Gelora Bung Karno',
     description: {
-      id: 'Dashboard internal untuk memantau kesehatan transaksi dan alerting.',
-      en: 'Internal dashboard to monitor transaction health and alerting.',
+      id: 'Aplikasi resmi kawasan Gelora Bung Karno, live di Google Play — one-stop app untuk pengunjung GBK: komunitas & forum olahraga, tracking aktivitas lari berbasis GPS dengan leaderboard, reservasi venue olahraga, info parkir real-time, berita & event kawasan, hingga notifikasi push.',
+      en: 'Official app of the Gelora Bung Karno sports complex, live on Google Play — a one-stop app for GBK visitors: sports communities & forums, GPS-based run tracking with leaderboards, sports venue reservations, real-time parking info, complex news & events, and push notifications.',
     },
-    tech: ['React', 'TypeScript', 'Node.js'],
+    tech: ['TypeScript', 'Node.js', 'Fastify', 'Prisma', 'PostgreSQL', 'Redis', 'MinIO', 'Firebase Admin', 'Zod', 'Argon2'],
+    link: 'https://play.google.com/store/apps/details?id=id.gbk.mobile',
+    period: { id: 'Nov 2025 — Feb 2026', en: 'Nov 2025 — Feb 2026' },
   },
 ];
